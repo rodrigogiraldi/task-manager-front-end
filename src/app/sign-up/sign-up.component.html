@@ -7,17 +7,17 @@
     <form>
       <div class="form-group">
         <label for="inputEmail">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+        <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
       </div>
       <div class="form-group">
         <label for="inputPassword1">Password</label>
-        <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+        <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="inputPassword1" placeholder="Password">
       </div>
       <div class="form-group">
         <label for="inputPassword2">Repeat your password</label>
-        <input type="password" class="form-control" id="inputPassword2" placeholder="Repeat your password">
+        <input [(ngModel)]="repeatEmail" name="repeatEmail" type="password" class="form-control" id="inputPassword2" placeholder="Repeat your password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary" (click)="signUp()">Submit</button>
       <small id="emailHelp" class="form-text text-muted">Already have an account? Click <a
           routerLink="/sign-in">here</a> to sign-in.</small>
     </form>
