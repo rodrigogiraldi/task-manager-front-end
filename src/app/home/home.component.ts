@@ -4,18 +4,17 @@ import { Router } from '@angular/router';
 import { SessionService } from '../session.service';
 
 @Component({
-  selector: 'app-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class SignInComponent implements OnInit {
+export class HomeComponent implements OnInit {
 
   constructor(private router: Router, private sessionService: SessionService) { }
 
   ngOnInit() {
-    if (this.sessionService.isLoggedIn()) {
-      this.router.navigateByUrl("/");
+    if (!this.sessionService.isLoggedIn()) {
+      this.router.navigateByUrl("/sign-in");
     }
   }
-
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../user.service';
+import { SessionService } from '../session.service';
 
 import { User } from '../user';
 
@@ -14,7 +16,7 @@ export class SignUpComponent implements OnInit {
   user: User;
   repeatEmail: string;
 
-  constructor(private userService: UserService) {
+  constructor(private router: Router, private userService: UserService, private sessionService: SessionService) {
   }
 
   ngOnInit() {
@@ -34,7 +36,8 @@ export class SignUpComponent implements OnInit {
         .create(this.user)
         .subscribe(
           res => {
-            console.log(res);
+            this.sessionService.setToken(res.data);
+            this.router.navigateByUrl("/home");
           },
           error => {
             console.log(error);
