@@ -15,6 +15,9 @@ export class SignUpComponent implements OnInit {
 
   user: User;
   repeatEmail: string;
+  showAlert: boolean = false;
+  alertMessage: string = "";
+  alertType: string = "";
 
   constructor(private router: Router, private userService: UserService, private sessionService: SessionService) {
   }
@@ -30,8 +33,6 @@ export class SignUpComponent implements OnInit {
 
   signUp() {
     if (this.isSignUpFormValid()) {
-      console.log("send request");
-
       this.userService
         .create(this.user)
         .subscribe(
@@ -40,12 +41,14 @@ export class SignUpComponent implements OnInit {
             this.router.navigateByUrl("/home");
           },
           error => {
-            console.log(error);
+            this.setUpAlert(true, "alert-danger", error.error.data);
           }
         )
     }
     else {
-      console.log("show error message");
+      if (this.user.password !== this.repeatEmail) {
+        this.setUpAlert(true, "alert-warning", "Passwords do not match");
+      }
     }
   }
 
@@ -53,4 +56,12 @@ export class SignUpComponent implements OnInit {
     return (this.user.email.length > 0 && this.user.password.length > 0 && this.user.password == this.repeatEmail);
   }
 
+  setUpAlert(showAlert: boolean, alertType?: string, alertMessage?: string) {
+    this.showAlert = showAlert;
+
+    if (showAlert) {
+      this.alertType = alertType;
+      this.alertMessage = alertMessage;
+    }
+  }
 }
