@@ -14,4 +14,8 @@ export class UserService {
   create(user: User) {
     return this.httpClient.post<any>(Config.API_URL + "/user", user);
   }
+
+  logIn(user: User) {
+    return this.httpClient.post<any>(Config.API_URL + "/user/login", user);
+  }
 }

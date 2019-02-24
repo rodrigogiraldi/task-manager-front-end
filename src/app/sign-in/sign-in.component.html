@@ -7,15 +7,20 @@
     <form>
       <div class="form-group">
         <label for="inputEmail">Email address</label>
-        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+        <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="inputEmail"
+          aria-describedby="emailHelp" placeholder="Enter email">
       </div>
       <div class="form-group">
         <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        <input [(ngModel)]="user.password" name="password" type="password" class="form-control" id="inputPassword1"
+          placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" (click)="signIn()">Submit</button>
       <small id="emailHelp" class="form-text text-muted">Don't you have an account? Click <a
           routerLink="/sign-up">here</a> to create one.</small>
     </form>
+    <div *ngIf="showAlert">
+      <app-alert [alertMessage]="alertMessage" [alertType]="alertType"></app-alert>
+    </div>
   </div>
 </div>

@@ -20,7 +20,15 @@ export class SessionService {
     return (token !== null && token !== undefined && token.length > 0);
   }
 
-  logIn() { }
+  logIn(token: string): boolean {
+    if (token) {
+      this.setToken(token);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 
   logOut() {
     localStorage.removeItem("sessionToken");

@@ -37,8 +37,9 @@ export class SignUpComponent implements OnInit {
         .create(this.user)
         .subscribe(
           res => {
-            this.sessionService.setToken(res.data);
-            this.router.navigateByUrl("/home");
+            if (this.sessionService.logIn(res.data)) {
+              this.router.navigateByUrl("/home");
+            }
           },
           error => {
             this.setUpAlert(true, "alert-danger", error.error.data);
