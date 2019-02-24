@@ -10,6 +10,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
 import { AlertComponent } from './alert/alert.component';
+import { NewTaskComponent } from './new-task/new-task.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AlertComponent } from './alert/alert.component';
     SignInComponent,
     WelcomeComponent,
     HomeComponent,
-    AlertComponent
+    AlertComponent,
+    NewTaskComponent
   ],
   imports: [
     BrowserModule,
