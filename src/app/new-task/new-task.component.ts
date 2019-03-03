@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TaskService } from '../task.service';
+import { CategoryService } from '../category.service';
 
 import { Task } from '../task';
 
@@ -12,23 +13,74 @@ import { Task } from '../task';
 export class NewTaskComponent implements OnInit {
 
   task: Task;
+  categories: string[];
 
-  constructor(private taskService: TaskService) { }
+  taskStart = {
+    date: "",
+    time: ""
+  };
+  taskEnd = {
+    date: "",
+    time: ""
+  };
+
+  showAlert: boolean = false;
+  alertMessage: string = "";
+  alertType: string = "";
+
+  constructor(private taskService: TaskService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.task = {
       id: 0,
-      category: 0,
+      category: "",
       startDateTime: new Date(),
-      endDateTime: new Date()
+      endDateTime: new Date(),
+      description: ""
     }
+
+    this.getCategories();
+  }
+
+  getCategories() {
+    this.categoryService.getAll().subscribe(
+      res => {
+        this.categories = res.data;
+      });
   }
 
   createTask() {
-    this.taskService.create(this.task).subscribe(
-      res => {
-        console.log(res);
-      }
+
+    if (this.isFormValid()) {
+      this.task.startDateTime = this.createDate(this.taskStart.date, this.taskStart.time);
+      this.task.endDateTime = this.createDate(this.taskEnd.date, this.taskEnd.time);
+
+      this.taskService.create(this.task).subscribe(
+        res => {
+          //TODO redirect to search component
+        }
+      )
+    }
+    else {
+      this.showAlert = true;
+      this.alertMessage = "You have to fill in all the fields to create a task";
+      this.alertType = "alert-warning";
+    }
+
+  }
+
+  createDate(date: string, time: string): Date {
+    return new Date(`${date} ${time}`);
+  }
+
+  isFormValid(): boolean {
+    return (
+      this.task.category !== "" &&
+      this.task.description !== "" &&
+      this.taskStart.date !== "" &&
+      this.taskStart.time !== "" &&
+      this.taskEnd.date !== "" &&
+      this.taskEnd.time !== ""
     )
   }
 

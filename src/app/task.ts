@@ -1,6 +1,7 @@
 export class Task {
     id: number;
-    category: number;
+    category: string;
     startDateTime: Date;
     endDateTime: Date;
+    description: string;
 }
