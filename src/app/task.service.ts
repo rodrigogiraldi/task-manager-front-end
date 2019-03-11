@@ -23,4 +23,14 @@ export class TaskService {
 
     return this.httpClient.post<any>(Config.API_URL + "/task", task, httpOptions);
   }
+
+  getAll(){
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.sessionService.getToken()
+      })
+    };
+
+    return this.httpClient.get<any>(Config.API_URL + "/task", httpOptions);    
+  }
 }

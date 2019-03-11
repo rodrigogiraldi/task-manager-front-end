@@ -11,6 +11,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
 import { AlertComponent } from './alert/alert.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { SearchTaskComponent } from './search-task/search-task.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NewTaskComponent } from './new-task/new-task.component';
     WelcomeComponent,
     HomeComponent,
     AlertComponent,
-    NewTaskComponent
+    NewTaskComponent,
+    SearchTaskComponent
   ],
   imports: [
     BrowserModule,
