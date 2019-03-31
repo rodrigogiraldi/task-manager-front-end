@@ -24,13 +24,23 @@ export class TaskService {
     return this.httpClient.post<any>(Config.API_URL + "/task", task, httpOptions);
   }
 
-  getAll(){
+  getAll() {
     let httpOptions = {
       headers: new HttpHeaders({
         'Authorization': this.sessionService.getToken()
       })
     };
 
-    return this.httpClient.get<any>(Config.API_URL + "/task", httpOptions);    
+    return this.httpClient.get<any>(Config.API_URL + "/task", httpOptions);
+  }
+
+  currentUserHasAny() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.sessionService.getToken()
+      })
+    };
+
+    return this.httpClient.get<any>(Config.API_URL + "/task/has-any", httpOptions);
   }
 }

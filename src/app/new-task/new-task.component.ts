@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { TaskService } from '../task.service';
 import { CategoryService } from '../category.service';
@@ -28,7 +29,7 @@ export class NewTaskComponent implements OnInit {
   alertMessage: string = "";
   alertType: string = "";
 
-  constructor(private taskService: TaskService, private categoryService: CategoryService) { }
+  constructor(private router: Router, private taskService: TaskService, private categoryService: CategoryService) { }
 
   ngOnInit() {
     this.task = {
@@ -57,7 +58,7 @@ export class NewTaskComponent implements OnInit {
 
       this.taskService.create(this.task).subscribe(
         res => {
-          //TODO redirect to search component
+          this.router.navigateByUrl("/search-task");
         }
       )
     }
